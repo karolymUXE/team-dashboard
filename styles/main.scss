@@ -1,0 +1,33 @@
+// main.scss
+
+// Variables
+@import 'base/reset.scss';
+// @import 'abstracts/variables.scss';
+
+// Estilos base
+@import 'base/base.scss';
+// @import 'base/index.scss';
+
+// Componentes
+// @import 'components/button';
+// @import 'components/input';
+// ...
+
+// Diseño de la página
+// @import 'layout/header';
+// @import 'layout/footer';
+// ...
+
+// Estilos específicos de página
+// @import 'pages/home';
+// @import 'pages/about';
+// ...
+
+// Temas
+// @import 'themes/theme-default';
+// ...
+
+// Estilos de terceros
+// @import 'vendors/bootstrap';
+// @import 'vendors/owl-carousel';
+// ...
