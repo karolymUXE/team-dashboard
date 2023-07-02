@@ -1,11 +1,12 @@
 // main.scss
 
 // Variables
-@import 'base/reset.scss';
+@import 'base/reset';
 // @import 'abstracts/variables.scss';
 
 // Estilos base
-@import 'base/base.scss';
+@import 'base/base';
+@import 'base/typography';
 // @import 'base/index.scss';
 
 // Componentes
