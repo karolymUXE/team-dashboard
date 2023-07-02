@@ -20,9 +20,9 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias     : {
           '@'          : path.resolve(new URL(import.meta.url).pathname, './src'),
-          '@routes'    : path.resolve(new URL(import.meta.url).pathname, '../src/routes'),
+          '@pages'     : path.resolve(new URL(import.meta.url).pathname, '../src/pages'),
           '@styles'    : path.resolve(new URL(import.meta.url).pathname, '../styles'),
-          '@assets'    : path.resolve(new URL(import.meta.url).pathname, '../src/assets'),
+          '@assets'    : path.resolve(new URL(import.meta.url).pathname, './src/assets'),
           '@components': path.resolve(new URL(import.meta.url).pathname, '../src/components')
       },
       extensions: ['.js', '.jsx', 'scss'],
