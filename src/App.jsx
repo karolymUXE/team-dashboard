@@ -10,8 +10,8 @@ import AboutMe from "@pages/AboutMe"
 import Poster from "@pages/Poster"
 import MainMenu from "@components/MainMenu"
 import ErrorPage from "@pages/ErrorPage"
-import { ThemeProvider } from '@mui/material//styles'
-import { createTheme } from '@mui/material//styles'
+import { ThemeProvider } from '@mui/material/styles'
+import { createTheme } from '@mui/material/styles'
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom"
 
 const App = () => {
