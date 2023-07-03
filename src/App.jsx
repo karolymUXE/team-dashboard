@@ -45,27 +45,27 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/teams",
+        path: "/Teams",
         element: <Teams />,
       },
       {
-        path: "/talent",
+        path: "/Talent",
         element: <Talent />,
       },
       {
-        path: "/engagement",
+        path: "/Engagement",
         element: <Engagement />,
       },
       {
-        path: "/develop",
+        path: "/Develop",
         element: <Develop />,
       },
       {
-        path: "/perform",
+        path: "/Perform",
         element: <Perform />,
       },
       {
-        path: "/reward",
+        path: "/Reward",
         element: <Reward />,
       },
       {
