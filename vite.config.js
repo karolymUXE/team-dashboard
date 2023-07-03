@@ -22,7 +22,6 @@ export default defineConfig(({ command }) => {
           '@'          : path.resolve(new URL(import.meta.url).pathname, './src'),
           '@pages'     : path.resolve(new URL(import.meta.url).pathname, '../src/pages'),
           '@styles'    : path.resolve(new URL(import.meta.url).pathname, '../src/assets/styles'),
-          '@assets'    : path.resolve(new URL(import.meta.url).pathname, './src/assets'),
           '@components': path.resolve(new URL(import.meta.url).pathname, '../src/components')
       },
       extensions: ['.js', '.jsx', 'scss'],
@@ -34,7 +33,7 @@ export default defineConfig(({ command }) => {
     baseUrl: './'
   }
   if (command !== 'serve') {
-    config.base = '/team-dashboard/'
+    config.base = '/'
   }
 
   return config
