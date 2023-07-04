@@ -1,0 +1,74 @@
+$palettes: (
+  primary: (
+    main:         #006141,
+    light:        #ccdfd9,
+    dark:         #004e34,
+    contrastText: #f9fafb,
+  ),
+  secondary: (
+    main:         #1B567E,
+    light:        #d1dde5,
+    dark:         #10344c,
+    contrastText: #f9fafb,
+  ),
+  error: (
+    main:         #ff5630,
+    light:        #ffe9d5,
+    dark:         #7a0916,
+    contrastText: #f9fafb,
+  ),
+  warning: (
+    main:         #ffab00,
+    light:        #fff5cc,
+    dark:         #7a4100,
+    contrastText: #f9fafb,
+  ),
+  info: (
+    main:         #00b8d9,
+    light:        #cafdf5,
+    dark:         #003768,
+    contrastText: #f9fafb,
+  ),
+  success: (
+    main:         #22c55e,
+    light:        #d3fcd2,
+    dark:         #065e49,
+    contrastText: #f9fafb,
+  ),
+  common: (
+    black: #212B36,
+    white: #f9fafb,
+  ),
+);
+
+@function color($color, $tone) {
+  $palette: map-get($palettes, $color);
+
+  @if map-has-key($palettes, $color) {
+    $value: map-get($palette, $tone);
+
+    @if $value {
+      @return $value;
+    }
+
+    @warn "Unknown tone `#{$tone}` in color";
+  }
+
+  @warn "Unknown color `#{$color}` in palette";
+  @return null;
+}
+
+// background-color: color(info, main);
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  margin-left: 64px;
+  margin-top: 64px;
+	padding: 24px;
+}
