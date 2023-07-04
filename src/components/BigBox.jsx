@@ -1,24 +1,29 @@
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
+// import EditIcon from '@mui/icons-material/Edit'
 import PropTypes from 'prop-types'
+import {Typography, Paper, Box} from '@mui/material'
 
-const BigBox = ({children, title}) => (
-  <Card sx={{ background: 'rgb(255,255,255,0.1)'}}>
-    <CardContent>
-      <Typography component="div" variant="h6" gutterBottom>
-        {title}
-      </Typography>
+export default function BigBox({ children, title, ...other }) {
 
-      {children}
-    </CardContent>
-  </Card>
-);
+  return (
+    <Paper variant="outlined"  sx={{mb: 3, p: 2}}  {...other}>
+      <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+        <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+        {/*<Box>
+          <Button color="secondary" variant="outlined" size="small" startIcon={<EditIcon />} >
+            Edit
+          </Button>
+  </Box>*/}
+      </Box>
+      <div>
+        {children}
+      </div>
+    </Paper>
+  );
+}
 
 BigBox.propTypes = {
   title: PropTypes.string,
   children: PropTypes.node,
-  props: PropTypes.array,
 }
-
-export default BigBox;

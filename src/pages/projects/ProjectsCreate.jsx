@@ -1,91 +1,123 @@
-import { db } from "../../firebase"
-import { uid } from "uid"
-import { set, ref } from "firebase/database"
-import React, { useState } from "react"
-import Button from '@mui/material/Button'
-import Stack from '@mui/material/Stack'
-import Box from '@mui/material/Box'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
-import DialogTitle from '@mui/material/DialogTitle'
-import FormControl from '@mui/material/FormControl'
-import TextField from '@mui/material/TextField'
+import { useState } from 'react'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField } from '@mui/material'
+import PropTypes from 'prop-types'
+import { createEntity } from '../../firebaseUtils'
 
-export default function Projects() {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [okr, setOKR] = useState("")
+function ProjectsCreate({ open, onClose }) {
+  const [newProject, setNewProject] = useState({
+    title: '',
+    squad: '',
+    responsible: [''],
+    okr: '',
+    miroboard: '',
+    jiraId: '',
+    description: ''
+  })
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value)
-  }
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value)
-  }
-  const handleOKRChange = (e) => {
-    setOKR(e.target.value)
-  }
-  // write
-  const writeToDatabase = () => {
-    const uuid = uid()
-    set(ref(db, `/${uuid}`), {
-        uuid,
-        title,
-        description,
-        okr,
-        // responsables,
-        // squad,
-        // miroboard,
-        // jiraid,
-    })
-
-    setTitle("")
-    handleClose()
-  }
-  // read
-  // update
-  // delete
-
-  const [open, setOpen] = React.useState(false)
-
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setNewProject((prevProject) => ({
+      ...prevProject,
+      [name]: value,
+    }))
   }
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleSave = () => {
+    createEntity('projects', newProject)
+      .then(() => {
+        console.log('Nuevo proyecto creada exitosamente en Firebase')
+        setNewProject({
+          title: '',
+          squad: '',
+          responsible: [''],
+          okr: '',
+          miroboard: '',
+          jiraId: '',
+          description: ''
+        })
+        onClose()
+      })
+      .catch((error) => {
+        console.error('Error al crear nuevo proyecto en Firebase:', error)
+      })
   }
 
   return (
-    <div id="Projects-create">
-      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} mb={2}>
-        <Button variant="contained" color="terciary" onClick={handleClickOpen}>add project</Button>
-      </Stack>
-      <Dialog maxWidth='lg' open={open} onClose={handleClose}>
-        <DialogTitle>Add Project</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You can set my maximum width and whether to adapt or not.
-          </DialogContentText>
-          <Box noValidate component="form" sx={{ display: 'flex',flexDirection: 'column', m: 'auto'}}>
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <TextField id="title" label="Title" variant="outlined" fullWidth  value={title} onChange={handleTitleChange}/>
-            </FormControl>
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <TextField id="title" label="Description" variant="outlined" fullWidth multiline maxRows={4} value={description} onChange={handleDescriptionChange}/>
-            </FormControl>
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <TextField id="title" label="Okr" variant="outlined" fullWidth value={okr} onChange={handleOKRChange}/>
-            </FormControl>
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-          <Button onClick={writeToDatabase}>Save</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Projects Create</DialogTitle>
+      <DialogContent>
+        <TextField
+          name="title"
+          label="Title"
+          value={newProject.title}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="squad"
+          label="Squad"
+          value={newProject.squad}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="responsible"
+          label="Responsible"
+          value={newProject.responsible}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="description"
+          label="Description"
+          value={newProject.description}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="jiraId"
+          label="Jira ID"
+          value={newProject.jiraId}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="miroboard"
+          label="MIRO Board Link"
+          value={newProject.miroboard}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          name="okr"
+          label="OKR"
+          value={newProject.okr}
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleSave} color="primary">
+          Guardar
+        </Button>
+        <Button onClick={onClose} color="secondary">
+          Cancelar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
 }
+
+ProjectsCreate.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+}
+
+export default ProjectsCreate
