@@ -20,8 +20,13 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias     : {
           '@'          : path.resolve(new URL(import.meta.url).pathname, './src'),
-          '@pages'     : path.resolve(new URL(import.meta.url).pathname, '../src/pages'),
+          '@talent'    : path.resolve(new URL(import.meta.url).pathname, '../src/modules/talent'),
           '@styles'    : path.resolve(new URL(import.meta.url).pathname, '../src/assets/styles'),
+          '@modules'   : path.resolve(new URL(import.meta.url).pathname, '../src/modules'),
+          '@develop'   : path.resolve(new URL(import.meta.url).pathname, '../src/modules/develop'),
+          '@perform'   : path.resolve(new URL(import.meta.url).pathname, '../src/modules/perform'),
+          '@reward'   : path.resolve(new URL(import.meta.url).pathname, '../src/modules/reward'),
+          '@engagement': path.resolve(new URL(import.meta.url).pathname, '../src/modules/engagement'),
           '@components': path.resolve(new URL(import.meta.url).pathname, '../src/components')
       },
       extensions: ['.js', '.jsx', 'scss'],
