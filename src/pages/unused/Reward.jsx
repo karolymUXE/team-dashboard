@@ -1,7 +1,7 @@
 function Reward() {
   return (
     <div id="Reward">
-        hola
+        Merit, salary and recognition
     </div>
   );
 }

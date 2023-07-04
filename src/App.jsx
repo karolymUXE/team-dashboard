@@ -1,14 +1,12 @@
-import Home from "@pages/Home"
-import Teams from "@pages/Teams"
-import Reward from "@pages/Reward"
-import Poster from "@pages/Poster"
-import Talent from "@pages/Talent"
-import Develop from "@pages/Develop"
-import Perform from "@pages/Perform"
+import Dashboard from "@pages/Dashboard"
+import Statistics from "@pages/Statistics"
+import People from "@pages/People"
+import Projects from "@pages/Projects"
+import Calendar from "@pages/Calendar"
+import Poster from "@components/Poster"
 import AboutMe from "@pages/AboutMe"
 import MainMenu from "@components/MainMenu"
 import ErrorPage from "@pages/ErrorPage"
-import Engagement from "@pages/Engagement"
 import CaseStudies from "@pages/CaseStudies"
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme } from '@mui/material/styles'
@@ -24,7 +22,7 @@ const App = () => {
   );
 };
 
-const DashBoard = () => {
+const Layout = () => {
   return (
     <div>
       <MainMenu />
@@ -38,35 +36,27 @@ const DashBoard = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DashBoard />,
+    element: <Layout />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Dashboard />,
       },
       {
-        path: "/Teams",
-        element: <Teams />,
+        path: "/People",
+        element: <People />,
       },
       {
-        path: "/Talent",
-        element: <Talent />,
+        path: "/Projects",
+        element: <Projects />,
       },
       {
-        path: "/Engagement",
-        element: <Engagement />,
+        path: "/Statistics",
+        element: <Statistics />,
       },
       {
-        path: "/Develop",
-        element: <Develop />,
-      },
-      {
-        path: "/Perform",
-        element: <Perform />,
-      },
-      {
-        path: "/Reward",
-        element: <Reward />,
+        path: "/Calendar",
+        element: <Calendar />,
       },
       {
         path: "/Case-studies",
@@ -97,44 +87,50 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main:         '#006141',
-      light:        '#ccdfd9',
-      dark:         '#004e34',
-      contrastText: '#f9fafb'
+      main:         '#5b5f97',
+      light:        '#b8b8d1',
+      dark:         '#37395b',
+      contrastText: '#fffffb',
     },
     secondary: {
-      main:         '#1B567E',
-      light:        '#d1dde5',
-      dark:         '#10344c',
-      contrastText: '#f9fafb'
+      main:         '#5e81f4',
+      light:        '#dfe6fd',
+      dark:         '#384d92',
+      contrastText: '#fffffb',
+    },
+    terciary: {
+      main:         '#ff6b6c',
+      light:        '#ffe1e2',
+      dark:         '#cc5656',
+      contrastText: '#fffffb',
     },
     error: {
       main:         '#ff5630',
       light:        '#ffe9d5',
       dark:         '#7a0916',
-      contrastText: '#f9fafb'
+      contrastText: '#fffffb',
     },
     warning: {
       main:         '#ffab00',
       light:        '#fff5cc',
       dark:         '#7a4100',
-      contrastText: '#f9fafb'
+      contrastText: '#fffffb',
     },
     info: {
       main:         '#00b8d9',
       light:        '#cafdf5',
       dark:         '#003768',
-      contrastText: '#f9fafb'
+      contrastText: '#fffffb',
     },
     success: {
       main:         '#22c55e',
       light:        '#d3fcd2',
       dark:         '#065e49',
-      contrastText: '#f9fafb'
+      contrastText: '#fffffb',
     },
     common: {
       black: '#212B36',
-      white: '#f9fafb'
+      white: '#fffffb',
     },
     grey: {
       50:  '#f9f9f1',
@@ -146,11 +142,11 @@ const theme = createTheme({
       600: '#637381',
       700: '#454f5b',
       800: '#212b36',
-      900: '#161c24'
+      900: '#161c24',
     },
     background: {
-      paper: '#FFFCF5',
-      default: '#FFFCF5',
+      paper: '#f3f3f2',
+      default: '#f3f3f2',
     }
   },
   shape: {

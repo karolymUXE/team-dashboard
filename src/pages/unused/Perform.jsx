@@ -1,7 +1,7 @@
 function Perform() {
   return (
     <div id="Perform">
-        hola
+        KPIs, feedback, actions plans, facilitation, delegation, celebration grid
     </div>
   );
 }

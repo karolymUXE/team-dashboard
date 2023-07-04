@@ -1,7 +1,7 @@
 function Develop() {
   return (
     <div id="Develop">
-        hola
+        Careers Plan, experiments (celebration grid), mentoring
     </div>
   );
 }

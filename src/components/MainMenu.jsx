@@ -1,11 +1,13 @@
 import * as React from 'react'
 import Box from '@mui/material/Box'
 import List from '@mui/material/List'
+import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
 import Toolbar from '@mui/material/Toolbar'
 import ListItem from '@mui/material/ListItem'
 import MenuIcon from '@mui/icons-material/Menu'
-import HomeIcon from '@mui/icons-material/Home'
+import WorkIcon from '@mui/icons-material/Work'
+import Face3Icon from '@mui/icons-material/Face3'
 import MuiDrawer from '@mui/material/Drawer'
 import MuiAppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
@@ -14,15 +16,13 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Groups3Icon from '@mui/icons-material/Groups3'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import TimelineIcon from '@mui/icons-material/Timeline'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import AnalyticsIcon from '@mui/icons-material/Analytics'
 import ListItemButton from '@mui/material/ListItemButton'
-import AssessmentIcon from '@mui/icons-material/Assessment'
-import Diversity2Icon from '@mui/icons-material/Diversity2'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
-import { styled, useTheme } from '@mui/material/styles'
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import { styled, useTheme } from '@mui/material/styles'
 
 const drawerWidth = 240;
 
@@ -100,15 +100,13 @@ const MainMenu = () => {
   }
 
   const drawerItems = [
-    { name: 'Home', icon: <HomeIcon />, divider: false },
-    { name: 'Teams', icon: <Groups3Icon />, divider: false },
-    { name: 'Talent', icon: <AutoAwesomeIcon />, divider: false },
-    { name: 'Engagement', icon: <Diversity2Icon />, divider: false },
-    { name: 'Develop', icon: <TimelineIcon />, divider: false },
-    { name: 'Perform', icon: <AssessmentIcon />, divider: false },
-    { name: 'Reward', icon: <EmojiEventsIcon />, divider: true },
+    { name: 'Dashboard', icon: <DashboardIcon />, divider: false },
+    { name: 'People', icon: <Groups3Icon />, divider: false },
+    { name: 'Projects', icon: <WorkIcon />, divider: false },
+    { name: 'Statistics', icon: <AnalyticsIcon />, divider: false },
+    { name: 'Calendar', icon: <CalendarMonthIcon />, divider: false },
     { name: 'Case studies', icon: <LibraryBooksIcon />, divider: false },
-    { name: 'About me', icon: <LibraryBooksIcon />, divider: false },
+    { name: 'About me', icon: <Face3Icon />, divider: false },
   ];
 
   return (
@@ -116,25 +114,32 @@ const MainMenu = () => {
       <CssBaseline />
       <AppBar position="fixed" open={open} color="primary">
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawer}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawer}
+              edge="start"
+              sx={{
+                marginRight: 5,
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              Karolym
+            </Typography>
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
 
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} paper={{ backgroundColor: 'primary.main'}}>
         <DrawerHeader>
           {open &&
             <IconButton onClick={handleDrawer}>
