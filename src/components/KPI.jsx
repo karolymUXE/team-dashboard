@@ -1,53 +1,57 @@
 import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import Typography from '@mui/material/Typography'
+import Paper from '@mui/material/Paper'
 import PropTypes from 'prop-types'
-import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import CssBaseline from "@mui/material/CssBaseline"
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
 import TrendingDownIcon from '@mui/icons-material/TrendingDown'
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat'
 
+function percentDiff(a, b) {
+  if (a === b) {
+    return 0
+  } else if (a === 0 || b === 0) {
+    return 100
+  }
 
-function KPI({title, amount, number, color}) {
-  return (
-    <Card sx={{ display: 'flex', background: 'rgb(255,255,255,0.1)' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h6" gutterBottom>
-            {title}
-          </Typography>
-          <strong>
-            <Typography variant="h4" color="text.secondary" component="div" gutterBottom>
-              {Intl.NumberFormat().format(amount)}
-            </Typography>
-          </strong>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-          {number > 0 ? (
-            <IconButton color="success" size='small' aria-label="chart up">
-              <TrendingUpIcon fontSize="inherit" />
-            </IconButton>
-          ) : (
-            <IconButton color="error" size='small' aria-label="chart down">
-              <TrendingDownIcon fontSize="inherit" />
-            </IconButton>
-          )}
-          <strong> {number}%</strong> than last week
-          </Typography>
-        </CardContent>
-      </Box>
-      <Box sx={{ m: 'auto' }}>
-        <AccountBalanceWalletIcon color={color} fontSize="large" />
-      </Box>
-    </Card>
-  );
+  const diff = Math.abs(a - b)
+  const max = Math.max(a, b)
+  const percent = Math.floor((diff / max) * 100)
+
+  return percent
 }
+
+const KPI = ({title, lastValue, newValue, type, bgColor, textColor}) => (
+  <Paper component='div' variant='elevation0' sx={{ display: 'flex', width: '302px', bgcolor: bgColor, p: 2, color: textColor, mb: 2}}>
+    <CssBaseline />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center' }}>
+      <Typography component="div" variant="body1" gutterBottom>
+        {title}
+      </Typography>
+      <Typography variant="subtitle1" component="div">
+        {newValue > lastValue ? (
+          <TrendingUpIcon fontSize="inherit" />
+        ) : newValue < lastValue ? (
+          <TrendingDownIcon fontSize="inherit" />
+        ) : (
+          <TrendingFlatIcon fontSize="inherit" />
+        )}
+        <strong> {percentDiff(newValue, lastValue)}%</strong> than last time
+      </Typography>
+    </Box>
+    <Box sx={{background: 'rgb(255,255,255,0.1)', px: 1, py: 2, ml: 'auto', height: '75px', borderRadius: 2, typography: 'h5', textAlign: 'center', fontWeight: 'bold', display: 'flex'}}>
+      {Intl.NumberFormat().format(newValue)} {type == 'percent' && ('%')}
+    </Box>
+  </Paper>
+);
 
 KPI.propTypes = {
   title: PropTypes.string,
-  amount: PropTypes.number,
-  number: PropTypes.number,
-  color: PropTypes.string,
+  newValue: PropTypes.number,
+  lastValue: PropTypes.number,
+  type: PropTypes.string,
+  bgColor: PropTypes.string,
+  textColor: PropTypes.string,
 }
 
-export default KPI
+export default KPI;

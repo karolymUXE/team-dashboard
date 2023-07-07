@@ -1,0 +1,121 @@
+$palettes: (
+  primary: (
+    main:         #006141,
+    light:        #ccdfd9,
+    dark:         #004e34,
+    contrastText: #f9fafb,
+  ),
+  secondary: (
+    main:         #1B567E,
+    light:        #d1dde5,
+    dark:         #10344c,
+    contrastText: #f9fafb,
+  ),
+  error: (
+    main:         #ff5630,
+    light:        #ffe9d5,
+    dark:         #7a0916,
+    contrastText: #f9fafb,
+  ),
+  warning: (
+    main:         #ffab00,
+    light:        #fff5cc,
+    dark:         #7a4100,
+    contrastText: #f9fafb,
+  ),
+  info: (
+    main:         #00b8d9,
+    light:        #cafdf5,
+    dark:         #003768,
+    contrastText: #f9fafb,
+  ),
+  success: (
+    main:         #22c55e,
+    light:        #d3fcd2,
+    dark:         #065e49,
+    contrastText: #f9fafb,
+  ),
+  white: (
+    main:         #fffffb,
+  ),
+  indigo: (
+    100: #dedfea,
+    200: #bdbfd5,
+    300: #9d9fc1,
+    400: #7c7fac,
+    500: #5b5f97,
+    600: #494c79,
+    700: #37395b,
+    800: #24263c,
+    900: #12131e,
+  ),
+  yellow: (
+    100: #fff3da,
+    200: #ffe6b5,
+    300: #ffda8f,
+    400: #ffcd6a,
+    500: #ffc145,
+    600: #cc9a37,
+    700: #997429,
+    800: #664d1c,
+    900: #33270e
+  ),
+  red: (
+    100: #ffe1e2,
+    200: #ffc4c4,
+    300: #ffa6a7,
+    400: #ff8989,
+    500: #ff6b6c,
+    600: #cc5656,
+    700: #994041,
+    800: #662b2b,
+    900: #331516
+  ),
+  violet: (
+    100: #f1f1f6,
+    200: #e3e3ed,
+    300: #d4d4e3,
+    400: #c6c6da,
+    500: #b8b8d1,
+    600: #9393a7,
+    700: #6e6e7d,
+    800: #4a4a54,
+    900: #25252a
+  ),
+  common: (
+    black: #212B36,
+    white: #f9fafb,
+  ),
+);
+
+@function color($color, $tone) {
+  $palette: map-get($palettes, $color);
+
+  @if map-has-key($palettes, $color) {
+    $value: map-get($palette, $tone);
+
+    @if $value {
+      @return $value;
+    }
+
+    @warn "Unknown tone `#{$tone}` in color";
+  }
+
+  @warn "Unknown color `#{$color}` in palette";
+  @return null;
+}
+
+// background-color: color(info, main);
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  margin-left: 64px;
+  margin-top: 64px;
+	padding: 24px;
+}
