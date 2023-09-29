@@ -104,7 +104,7 @@ const MainMenu = () => {
     { name: 'People', icon: <Groups3Icon />, divider: false },
     { name: 'Projects', icon: <WorkIcon />, divider: false },
     { name: 'Statistics', icon: <AnalyticsIcon />, divider: false },
-    { name: 'Calendar', icon: <CalendarMonthIcon />, divider: false },
+    { name: 'Activities', icon: <CalendarMonthIcon />, divider: false },
     { name: 'Case studies', icon: <LibraryBooksIcon />, divider: false },
     { name: 'About me', icon: <Face3Icon />, divider: false },
   ];

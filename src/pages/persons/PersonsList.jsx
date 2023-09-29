@@ -1,29 +1,16 @@
-import { db } from '../../firebase'
-import DataTable from '../../components/DataTable'
-import Typography from '@mui/material/Typography'
-import PersonsEdit from './PersonsEdit'
-import PersonsCreate from './PersonsCreate'
-import PersonsView from './PersonsView'
-import { useEffect, useState } from 'react'
-import { onValue, remove, update, ref } from 'firebase/database'
-import Button from '@mui/material/Button'
+import { db } from '../../firebase';
+import DataTable from '../../components/DataTable';
+import { onValue, remove, ref, update } from 'firebase/database';
+import { useState, useEffect } from 'react';
+import { Button, Typography, Stack } from '@mui/material';
+import PersonsEdit from './PersonsEdit';
+import PersonsCreate from './PersonsCreate';
 
 function PersonsList() {
   const [persons, setPersons] = useState([]);
   const [editingPerson, setEditingPerson] = useState(null);
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
-  const [openViewDialog, setOpenViewDialog] = useState(false);
-  const [selectedPerson, setSelectedPerson] = useState({});
-
-  const handleOpenViewDialog = (person) => {
-    setSelectedPerson(person);
-    setOpenViewDialog(true);
-  };
-
-  const handleCloseViewDialog = () => {
-    setOpenViewDialog(false);
-  };
 
   const handleOpenCreateDialog = () => {
     setOpenCreateDialog(true);
@@ -91,22 +78,22 @@ function PersonsList() {
     <>
       <div>
         <Typography variant="h5" mb={2}>
-          Lista de Personas
+          Persons List
         </Typography>
         <PersonsCreate open={openCreateDialog} onClose={handleCloseCreateDialog} />
-        <Button variant="contained" color="primary" onClick={handleOpenCreateDialog}>
-          Crear Persona
-        </Button>
+        <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={2} mb={2}>
+          <Button variant="contained" color="terciary" onClick={handleOpenCreateDialog}>Add person</Button>
+        </Stack>
         {persons.length > 0 && (
-          <DataTable data={persons} columns={columns} onEdit={handleEdit} onDelete={handleDelete}  onView={handleOpenViewDialog} />
+          <DataTable
+            data={persons}
+            columns={columns}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            type='People'
+          />
         )}
-        <PersonsView open={openViewDialog} onClose={handleCloseViewDialog} person={selectedPerson} />
-        <PersonsEdit
-          open={openEditDialog}
-          onClose={handleCloseEditDialog}
-          person={editingPerson}
-          onSave={handleSave}
-        />
+        <PersonsEdit open={openEditDialog} onClose={handleCloseEditDialog} person={editingPerson} onSave={handleSave} />
       </div>
     </>
   );

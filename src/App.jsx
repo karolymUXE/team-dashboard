@@ -1,9 +1,10 @@
 import Dashboard from "@pages/Dashboard"
 import Statistics from "@pages/Statistics"
 import People from "@pages/People"
+import PersonsView from "@pages/persons/PersonsView"
+import ProjectsView from '@pages/projects/ProjectsView'
 import Projects from "@pages/Projects"
-import Calendar from "@pages/Calendar"
-import Poster from "@components/Poster"
+import Activities from "@pages/Activities"
 import AboutMe from "@pages/AboutMe"
 import MainMenu from "@components/MainMenu"
 import ErrorPage from "@pages/ErrorPage"
@@ -47,16 +48,24 @@ const router = createBrowserRouter([
         element: <People />,
       },
       {
+        path: "/People/:id",
+        element: <PersonsView />,
+      },
+      {
         path: "/Projects",
         element: <Projects />,
+      },
+      {
+        path: "/Projects/:id",
+        element: <ProjectsView />,
       },
       {
         path: "/Statistics",
         element: <Statistics />,
       },
       {
-        path: "/Calendar",
-        element: <Calendar />,
+        path: "/Activities",
+        element: <Activities />,
       },
       {
         path: "/Case-studies",
@@ -67,10 +76,6 @@ const router = createBrowserRouter([
         element: <AboutMe />,
       },
     ],
-  },
-  {
-    path: "/poster/:id",
-    element: <Poster />,
   },
   {
     path: "*",

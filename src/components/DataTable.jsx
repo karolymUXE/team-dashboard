@@ -1,10 +1,9 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import VisibilityIcon from '@mui/icons-material/Visibility'
 import PropTypes from 'prop-types'
 
-function DataTable({ data, columns, onEdit, onDelete, onView }) {
+function DataTable({ data, columns, onEdit, onDelete, type }) {
   const handleEditClick = (item) => {
     onEdit(item);
   };
@@ -14,30 +13,30 @@ function DataTable({ data, columns, onEdit, onDelete, onView }) {
   };
 
   const handleViewClick = (item) => {
-    onView(item);
+    window.location.href = `/${type}/${item.id}`;
   };
 
   return (
     <TableContainer component={Paper}>
-      <Table>
+      <Table stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
             {columns.map((column) => (
               <TableCell key={column.field}>{column.header}</TableCell>
             ))}
-            {onEdit &&
+            {(onEdit || onDelete) &&
               <TableCell>Actions</TableCell>
             }
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((item, index) => (
-            <TableRow key={index}>
+            <TableRow hover key={index}>
               {columns.map((column) => (
-                <TableCell key={`${item.id}-${column.field}`}>{item[column.field]}</TableCell>
+                <TableCell key={`${item.id}-${column.field}`} onClick={() => handleViewClick(item)}>{item[column.field]}</TableCell>
               ))}
-              {(onEdit || onDelete || onView) &&
-                <TableCell sx={{width: '152px'}}>
+              {(onEdit || onDelete) &&
+                <TableCell sx={{width: '112px'}}>
                   {onEdit && (
                     <IconButton onClick={() => handleEditClick(item)} aria-label="Edit">
                       <EditIcon />
@@ -49,11 +48,6 @@ function DataTable({ data, columns, onEdit, onDelete, onView }) {
                     </IconButton>
                   )
                   }
-                  {onView && (
-                    <IconButton onClick={() => handleViewClick(item)} aria-label="View">
-                      <VisibilityIcon />
-                    </IconButton>
-                  )}
                 </TableCell>
               }
             </TableRow>
@@ -69,7 +63,7 @@ DataTable.propTypes = {
   columns: PropTypes.array,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
-  onView: PropTypes.func,
+  type: PropTypes.string,
 }
 
 export default DataTable
